@@ -45,9 +45,9 @@ public class SwaggerConfig {
     }
 
     private Contact contact(){
-        return new Contact("Marco Antônio Araújo"
-                , "http://github.com/marcoaparaujo",
-                "marcoaparaujo@gmail.com");
+        return new Contact("pedro e pedro"
+                , "https://github.com/pedroppb/ppb-lp4",
+                "falecom@minharola.com.br");
     }
 
 
