@@ -52,6 +52,12 @@ public class DisciplinaService {
         if (disciplina.getCurso() == null || disciplina.getCurso().getId() == null || disciplina.getCurso().getId() == 0) {
             throw new RegraNegocioException("Curso inválido");
         }
+        if (disciplina.getCargaHoraria() > 300 ) {
+            throw new RegraNegocioException("Carga horaria acima do permitido");
+        }
+        if (getDisciplinasByCurso(Optional.of(disciplina.getCurso())).size() > 10 ) {
+            throw new RegraNegocioException("curso já tem o maximo de disciplinas");
+        }
     }
 }
 

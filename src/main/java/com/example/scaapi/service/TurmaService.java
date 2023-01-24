@@ -51,5 +51,25 @@ public class TurmaService {
         if (turma.getDisciplina() == null || turma.getDisciplina().getId() == null || turma.getDisciplina().getId() == 0) {
             throw new RegraNegocioException("Disciplina inválida");
         }
+        if (turma.getAlunos().size() > 15) {
+            throw new RegraNegocioException("maximo de alunos na turma atingido");
+        }
+        List<Turma> todasturmas = getTurmas();
+        for (Turma t : todasturmas){
+            if(t.getProfessor().getId()==turma.getProfessor().getId()&&
+                t.getAno()== turma.getAno()&&
+                t.getSemestre()==turma.getSemestre()&&
+                t.getDisciplina().getId()==turma.getDisciplina().getId()
+            ){
+                throw new RegraNegocioException("professor ja possui outra turma");
+            }
+            if(t.getDisciplina().getId()==turma.getDisciplina().getId()&&
+                    t.getAno()== turma.getAno()&&
+                    t.getSemestre()==turma.getSemestre()
+            ){
+                throw new RegraNegocioException("disciplina já cadastrada nesse semestre");
+            }
+
+        }
     }
 }
