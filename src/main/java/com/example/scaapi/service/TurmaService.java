@@ -39,7 +39,7 @@ public class TurmaService{
         repository.delete(turma);
     }
 
-    public void validar(ITurma turma) {
+    public void validar(Turma turma) {
         if (turma.getAno() == null || turma.getAno() == 0) {
             throw new RegraNegocioException("Ano inválido");
         }
