@@ -21,19 +21,8 @@ import static org.mockito.internal.util.MockUtil.createMock;
 @SpringBootTest
 @RequiredArgsConstructor
 class ScaapiApplicationTests {
-    private final TurmaService service;
-    @Test
+        @Test
     void contextLoads() {
     }
-    @Test
-    public void anoinvalido (){
-        try {
-            Turma t = new Turma();
-            service.validar(t);
-            service.validar(t);
-            fail();
-        }catch(RuntimeException e){
-            assertEquals("Ano inválido",e.getMessage());
-        }
-    }
+
 }

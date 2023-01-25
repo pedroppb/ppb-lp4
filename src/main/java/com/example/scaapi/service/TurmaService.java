@@ -3,6 +3,7 @@ package com.example.scaapi.service;
 import com.example.scaapi.exception.RegraNegocioException;
 import com.example.scaapi.model.entity.Turma;
 import com.example.scaapi.model.repository.TurmaRepository;
+import com.example.scaapi.service.interf.ITurma;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TurmaService {
+public class TurmaService{
     private TurmaRepository repository;
 
     public TurmaService(TurmaRepository repository) {
@@ -38,7 +39,7 @@ public class TurmaService {
         repository.delete(turma);
     }
 
-    public void validar(Turma turma) {
+    public void validar(ITurma turma) {
         if (turma.getAno() == null || turma.getAno() == 0) {
             throw new RegraNegocioException("Ano inválido");
         }
@@ -54,6 +55,7 @@ public class TurmaService {
         if (turma.getAlunos().size() > 15) {
             throw new RegraNegocioException("maximo de alunos na turma atingido");
         }
+
         List<Turma> todasturmas = getTurmas();
         for (Turma t : todasturmas){
             if(t.getProfessor().getId()==turma.getProfessor().getId()&&
@@ -69,7 +71,6 @@ public class TurmaService {
             ){
                 throw new RegraNegocioException("disciplina já cadastrada nesse semestre");
             }
-
         }
     }
 }

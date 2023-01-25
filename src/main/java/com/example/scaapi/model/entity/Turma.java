@@ -1,5 +1,6 @@
 package com.example.scaapi.model.entity;
 
+import com.example.scaapi.service.interf.ITurma;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
