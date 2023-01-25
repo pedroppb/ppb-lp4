@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,5 +33,5 @@ public class Turma {
         @JoinTable(name = "turma_aluno",
                 joinColumns = @JoinColumn(name = "turma_id"),
                 inverseJoinColumns = @JoinColumn(name = "aluno_id"))
-        private List<Aluno> alunos;
+        private List<Aluno> alunos= new ArrayList<>();
 }
