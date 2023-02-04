@@ -1,5 +1,6 @@
 package com.example.scaapi.model.entity;
 
+import com.example.scaapi.model.entity.interf.IAluno;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aluno extends Pessoa {
+public class Aluno extends Pessoa implements IAluno {
 
     private Integer matricula;
 
@@ -20,4 +21,5 @@ public class Aluno extends Pessoa {
 
     @ManyToMany(mappedBy = "alunos")
     private List<Turma> turmas;
+
 }

@@ -1,5 +1,6 @@
 package com.example.scaapi.model.entity;
 
+import com.example.scaapi.model.entity.interf.ICurso;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Curso {
+public class Curso implements ICurso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

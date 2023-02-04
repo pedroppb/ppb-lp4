@@ -2,7 +2,9 @@ package com.example.scaapi.service;
 
 import com.example.scaapi.exception.RegraNegocioException;
 import com.example.scaapi.model.entity.Curso;
+import com.example.scaapi.model.entity.interf.ICurso;
 import com.example.scaapi.model.repository.CursoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +15,8 @@ import java.util.Optional;
 @Service
 public class CursoService {
 
+    @Autowired
     private CursoRepository repository;
-
-    public CursoService(CursoRepository repository) {
-        this.repository = repository;
-    }
 
     public List<Curso> getCursos() {
         return repository.findAll();
@@ -39,9 +38,10 @@ public class CursoService {
         repository.delete(curso);
     }
 
-    public void validar(Curso curso) {
+    public String validar(ICurso curso) {
         if (curso.getNome() == null || curso.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
+        return "Curso valida";
     }
 }

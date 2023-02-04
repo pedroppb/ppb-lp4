@@ -1,5 +1,6 @@
 package com.example.scaapi.model.entity;
 
+import com.example.scaapi.model.entity.interf.IDisciplina;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Disciplina {
+public class Disciplina implements IDisciplina {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

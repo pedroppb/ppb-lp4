@@ -4,6 +4,8 @@ import com.example.scaapi.exception.RegraNegocioException;
 import com.example.scaapi.model.entity.Curso;
 import com.example.scaapi.model.entity.Disciplina;
 import com.example.scaapi.model.repository.DisciplinaRepository;
+import com.example.scaapi.model.entity.interf.IDisciplina;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +15,8 @@ import java.util.Optional;
 
 @Service
 public class DisciplinaService {
-
+    @Autowired
     private DisciplinaRepository repository;
-
-    public DisciplinaService(DisciplinaRepository repository) {
-        this.repository = repository;
-    }
 
     public List<Disciplina> getDisciplinas() {
         return repository.findAll();
@@ -44,7 +42,7 @@ public class DisciplinaService {
         repository.delete(disciplina);
     }
 
-    public void validar(Disciplina disciplina) {
+    public String validar(IDisciplina disciplina) {
 
         if (disciplina.getNome() == null || disciplina.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
@@ -55,9 +53,10 @@ public class DisciplinaService {
         if (disciplina.getCargaHoraria() > 300 ) {
             throw new RegraNegocioException("Carga horaria acima do permitido");
         }
-        if (getDisciplinasByCurso(Optional.of(disciplina.getCurso())).size() > 10 ) {
-            throw new RegraNegocioException("curso já tem o maximo de disciplinas");
+        if (disciplina.getCargaHoraria() < 15 ) {
+            throw new RegraNegocioException("Carga horaria abaixo do minimo");
         }
+        return "disciplina valida";
     }
 }
 

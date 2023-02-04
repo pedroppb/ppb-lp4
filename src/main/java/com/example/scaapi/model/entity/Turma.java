@@ -1,6 +1,6 @@
 package com.example.scaapi.model.entity;
 
-import com.example.scaapi.service.interf.ITurma;
+import com.example.scaapi.model.entity.interf.ITurma;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Turma {
+public class Turma implements ITurma{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +33,5 @@ public class Turma {
         @JoinTable(name = "turma_aluno",
                 joinColumns = @JoinColumn(name = "turma_id"),
                 inverseJoinColumns = @JoinColumn(name = "aluno_id"))
-        private List<Aluno> alunos= new ArrayList<>();
+        private List<Aluno> alunos = new ArrayList<>();
 }

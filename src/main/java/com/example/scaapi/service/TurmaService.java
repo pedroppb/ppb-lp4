@@ -3,7 +3,8 @@ package com.example.scaapi.service;
 import com.example.scaapi.exception.RegraNegocioException;
 import com.example.scaapi.model.entity.Turma;
 import com.example.scaapi.model.repository.TurmaRepository;
-import com.example.scaapi.service.interf.ITurma;
+import com.example.scaapi.model.entity.interf.ITurma;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,15 +13,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TurmaService{
+public class TurmaService {
+    @Autowired
     private TurmaRepository repository;
 
-    public TurmaService(TurmaRepository repository) {
-        this.repository = repository;
-    }
-
-    public List<Turma> getTurmas() {
-        return repository.findAll();
+    public List<Turma> getTurmas() {return repository.findAll();
     }
 
     public Optional<Turma> getTurmaById(Long id) {
@@ -39,7 +36,7 @@ public class TurmaService{
         repository.delete(turma);
     }
 
-    public void validar(Turma turma) {
+    public String validar(ITurma turma) {
         if (turma.getAno() == null || turma.getAno() == 0) {
             throw new RegraNegocioException("Ano inválido");
         }
@@ -55,22 +52,9 @@ public class TurmaService{
         if (turma.getAlunos().size() > 15) {
             throw new RegraNegocioException("maximo de alunos na turma atingido");
         }
-
-        List<Turma> todasturmas = getTurmas();
-        for (Turma t : todasturmas){
-            if(t.getProfessor().getId()==turma.getProfessor().getId()&&
-                t.getAno()== turma.getAno()&&
-                t.getSemestre()==turma.getSemestre()&&
-                t.getDisciplina().getId()==turma.getDisciplina().getId()
-            ){
-                throw new RegraNegocioException("professor ja possui outra turma");
-            }
-            if(t.getDisciplina().getId()==turma.getDisciplina().getId()&&
-                    t.getAno()== turma.getAno()&&
-                    t.getSemestre()==turma.getSemestre()
-            ){
-                throw new RegraNegocioException("disciplina já cadastrada nesse semestre");
-            }
+        if (turma.getProfessor() == null || turma.getProfessor().getId() == null || turma.getProfessor().getId() == 0) {
+            throw new RegraNegocioException("turma deve haver um professor");
         }
+        return "turma valida";
     }
 }
